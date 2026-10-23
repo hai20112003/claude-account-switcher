@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "claude-account-switcher"
+version = "0.4.3"
+description = "macOS menu bar and Windows tray app to switch between Claude Code and Codex CLI accounts instantly"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+keywords = ["claude", "claude-code", "codex", "account-switcher", "macos", "menu-bar", "windows", "system-tray"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "rumps>=0.4.0; sys_platform == 'darwin'",
+    "pystray>=0.19; sys_platform == 'win32'",
+    "pillow>=10.0; sys_platform == 'win32'",
+    "tomli>=2.0.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "py2app>=0.28; sys_platform == 'darwin'",
+    "pyinstaller>=6.0; sys_platform == 'win32'",
+]
+
+[project.urls]
+Repository = "https://github.com/hai20112003/claude-account-switcher"
+
+[project.scripts]
+claude-switcher = "claude_switcher.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
